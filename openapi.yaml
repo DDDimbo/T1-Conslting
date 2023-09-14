@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: REST API, вычисляющее частоту встречи символов по заданной строке
+  version: 0.0.1
+  description: что-то придумать тут
+servers:
+  - url: http://localhost:8080
+    description: Dev server
+paths:
+  /t1-consulting:
+    get:
+      summary: Метод для проверки работы сервера
+      tags:
+        - Check
+      operationId: serverCheck
+      responses:
+        '200':
+          description: Подтверждение успешной работы сервера
+          content:
+            application/json: {}
+        
+  /t1-consulting/symbols_frequency:
+    post:
+      summary: Метод для вычисления частоты встреч символов по заданной строке
+      tags:
+        - Symbols frequency
+      operationId: symbols_frequency
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Symbols"
+      responses:
+        '200':
+          description: Вычисление частоты встреч символов и их вывод в порядке убывания
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: 
+                  type: integer
+                      
+                    
+
+
+components:
+  schemas:
+    Symbols:
+      type: object
+      required: 
+        - text
+      properties:
+        text:
+          type: string
+          example: aaaacccbbbbbb
+
